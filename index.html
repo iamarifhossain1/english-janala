@@ -6,7 +6,7 @@
     <title>English - Janala | Best Platform for Learning English</title>
     <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon" />
     <!-- External CSS -->
-    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Daisy UI CDN -->
@@ -71,8 +71,8 @@
               </ul>
             </div>
             <a href="" class="flex items-center gap-1">
-              <p class="poppins text-xl font-bold">English</p>
-              <img src="assets/logo.png" alt="" class="w-8" />
+              <p class="poppins text-xl font-bold w-full">English</p>
+              <img src="assets/logo.png" alt="" class="" />
               <p class="tiro-bangla text-lg font-semibold">জানালা</p>
             </a>
           </div>
@@ -109,7 +109,7 @@
       </section>
 
       <!-- Banner -->
-      <section class="">
+      <section class="mb-10 lg:mb-28">
         <div
           class="w-11/12 banner-container flex flex-col-reverse md:flex-row justify-between items-center mx-auto"
         >
@@ -153,8 +153,29 @@
     </header>
 
     <!-- Main -->
-    <main></main>
+    <main>
+      <!-- Lessons -->
+      <section class="">
+        <h1 class="text-4xl font-bold text-center lg:mb-20">
+          <span class="text-sky-500">Let's</span> Learn Vocabularies
+          <div
+            id="level-container"
+            class="flex flex-wrap justify-center gap-5 mt-10"
+          ></div>
+        </h1>
+      </section>
+
+      <!-- Word Card -->
+      <section
+        id="word-container"
+        class="bg-gray-100 p-10 w-11/12 mx-auto mb-20 rounded-xl"
+      >
+        <div></div>
+      </section>
+    </main>
     <!-- Footer -->
     <footer></footer>
+
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
