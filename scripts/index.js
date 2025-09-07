@@ -34,6 +34,15 @@ const displayLessons = (lessons) => {
 const loadWords = (words) => {
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = "";
+  if (words.length === 0) {
+    wordContainer.innerHTML = `<div class="text-center col-span-full space-y-3">
+            <img src="./assets/alert-error.png" class="mx-auto">
+          <p class="hind text-gray-500 text-xl">
+            এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।
+          </p>
+          <h2 class="hind text-4xl font-medium">নেক্সট Lesson এ যান</h2>
+        </div>`;
+  }
   words.forEach((word) => {
     const wordsCard = document.createElement("div");
     wordsCard.innerHTML = `<div class="bg-white rounded-xl shadow-md text-center space-y-3 py-10">
