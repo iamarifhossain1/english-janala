@@ -46,9 +46,15 @@ const loadWords = (words) => {
   words.forEach((word) => {
     const wordsCard = document.createElement("div");
     wordsCard.innerHTML = `<div class="bg-white rounded-xl shadow-md text-center space-y-3 py-10">
-          <h1 class="text-xl font-bold">${word.word}</h1>
+          <h1 class="text-xl font-bold">${
+            word.word ? word.word : "শব্দটি পাওয়া যায়নি"
+          }</h1>
           <p class="text-lg font-semibold">Meaning /Pronounciation</p>
-          <p class="text-gray-700 text-lg font-semibold">"${word.meaning} / ${word.pronunciation}"</p>
+          <p class="text-gray-700 text-lg font-semibold">"${
+            word.meaning ? word.meaning : "অর্থটি পাওয়া যায়নি"
+          } / ${
+      word.pronunciation ? word.pronunciation : "Pronunciation পাওয়া যায়নি"
+    }"</p>
           <div class="flex justify-between mx-6 items-center">
             <button class="btn bg-blue-100">
               <i class="fa-solid fa-circle-info"></i>
