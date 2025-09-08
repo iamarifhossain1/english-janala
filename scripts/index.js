@@ -5,6 +5,12 @@ const createElement = (arr) => {
   return htmlElemets.join(" ");
 };
 
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 const loadLessons = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
   fetch(url)
@@ -81,7 +87,9 @@ const loadWords = (words) => {
             })" class="btn bg-blue-100">
               <i class="fa-solid fa-circle-info "></i>
             </button>
-            <button class="btn bg-blue-100">
+            <button onclick="pronounceWord('${
+              word.word
+            }')" class="btn bg-blue-100">
               <i class="fa-solid fa-volume-high"></i>
             </button>
           </div>
