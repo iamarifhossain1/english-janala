@@ -35,7 +35,7 @@ const displayLessons = (lessons) => {
     console.log(lesson);
 
     const levelDiv = document.createElement("div");
-    levelDiv.innerHTML = `<button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn p-3">
+    levelDiv.innerHTML = `<button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn ">
  <i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}</button>`;
 
     levelContainer.appendChild(levelDiv);
