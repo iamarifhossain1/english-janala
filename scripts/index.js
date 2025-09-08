@@ -35,7 +35,7 @@ const displayLessons = (lessons) => {
     console.log(lesson);
 
     const levelDiv = document.createElement("div");
-    levelDiv.innerHTML = `<button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
+    levelDiv.innerHTML = `<button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn p-3">
  <i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}</button>`;
 
     levelContainer.appendChild(levelDiv);
@@ -48,10 +48,10 @@ const loadWords = (words) => {
   if (words.length === 0) {
     wordContainer.innerHTML = `<div class="text-center col-span-full space-y-3">
             <img src="./assets/alert-error.png" class="mx-auto">
-          <p class="hind text-gray-500 text-xl">
+          <p class="hind text-gray-500">
             এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।
           </p>
-          <h2 class="hind text-4xl font-medium">নেক্সট Lesson এ যান</h2>
+          <h2 class="hind  font-medium">নেক্সট Lesson এ যান</h2>
         </div>`;
   }
   words.forEach((word) => {
