@@ -1,3 +1,10 @@
+const createElement = (arr) => {
+  const htmlElemets = arr.map(
+    (el) => `<span class="btn bg-blue-100">${el}</span>`
+  );
+  return htmlElemets.join(" ");
+};
+
 const loadLessons = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
   fetch(url)
@@ -11,7 +18,7 @@ const removeActive = () => {
 };
 
 const loadLevelWord = (id) => {
-  console.log(id);
+  spinner(true);
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((response) => response.json())
@@ -48,11 +55,13 @@ const loadWords = (words) => {
   if (words.length === 0) {
     wordContainer.innerHTML = `<div class="text-center col-span-full space-y-3">
             <img src="./assets/alert-error.png" class="mx-auto">
-          <p class="hind text-gray-500">
+          <p class="hind text-gray-500 sm:text-base md:text-xl">
             এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।
           </p>
-          <h2 class="hind  font-medium">নেক্সট Lesson এ যান</h2>
+          <h2 class="hind font-medium text-xl md:text-4xl">নেক্সট Lesson এ যান</h2>
         </div>`;
+    spinner(false);
+    return;
   }
   words.forEach((word) => {
     const wordsCard = document.createElement("div");
@@ -67,7 +76,9 @@ const loadWords = (words) => {
       word.pronunciation ? word.pronunciation : "Pronunciation পাওয়া যায়নি"
     }"</p>
           <div class="flex justify-between mx-6 items-center">
-            <button onclick="my_modal_5.showModal()" class="btn bg-blue-100">
+            <button onclick="loadWordDetail(${
+              word.id
+            })" class="btn bg-blue-100">
               <i class="fa-solid fa-circle-info "></i>
             </button>
             <button class="btn bg-blue-100">
@@ -77,6 +88,73 @@ const loadWords = (words) => {
         </div>`;
     wordContainer.appendChild(wordsCard);
   });
+
+  spinner(false);
 };
+
+const loadWordDetail = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  const response = await fetch(url);
+  const details = await response.json();
+  displayWordDetail(details.data);
+};
+
+const displayWordDetail = (word) => {
+  console.log(word);
+  const detailModal = document.getElementById("details-container");
+  detailModal.innerHTML = `<div
+              class="bg-white shadow-lg border-1 border-gray-200 p-4 rounded-xl space-y-3"
+            >
+              <h2 class="text-2xl font-semibold">
+                ${word.word} (<i class="fa-solid fa-microphone-lines"></i>: ${
+    word.pronunciation
+  })
+              </h2>
+              <h2 class="text-xl font-semibold">Meaning</h2>
+              <p class="font-semibold">${word.meaning}</p>
+              <h2 class="text-lg font-semibold">Example</h2>
+              <p class="text-gray-700">
+                ${word.sentence}
+              </p>
+              <div class="">
+              <p class="font-semibold">সমার্থক শব্দ গুলো</p>
+                <div class="">${createElement(word.synonyms)}</div>
+              </div>
+              <button class="btn btn-primary poppins text-sm mt-5">
+                Complete Learning
+              </button>
+            </div>`;
+  document.getElementById("word_modal").showModal();
+};
+
+const spinner = (status) => {
+  if (status === true) {
+    document.getElementById("spinner").classList.remove("hidden");
+    document.getElementById("word-container").classList.add("hidden");
+  } else {
+    document.getElementById("word-container").classList.remove("hidden");
+    document.getElementById("spinner").classList.add("hidden");
+  }
+};
+
+const searchBar = document
+  .getElementById("search-btn")
+  .addEventListener("click", () => {
+    removeActive();
+    const searchInput = document.getElementById("search-input");
+    const searchValue = searchInput.value.trim().toLowerCase();
+    console.log(searchValue);
+
+    fetch("https://openapi.programming-hero.com/api/words/all")
+      .then((response) => response.json())
+      .then((data) => {
+        const allWords = data.data;
+        console.log(allWords);
+        const filterWords = allWords.filter((word) =>
+          word.word.toLowerCase().includes(searchValue)
+        );
+        loadWords(filterWords);
+      });
+  });
 
 loadLessons();

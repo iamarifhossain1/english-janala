@@ -154,7 +154,7 @@
     <!-- Main -->
     <main>
       <!-- Lessons -->
-      <section class="">
+      <section class="mb-10 md:mb-10">
         <h1 class="text-4xl font-bold text-center lg:mb-20">
           <span class="text-sky-500">Let's</span> Learn Vocabularies
           <div
@@ -162,6 +162,32 @@
             class="flex flex-wrap justify-center gap-5 mt-10"
           ></div>
         </h1>
+      </section>
+
+      <!-- Spinner -->
+
+      <section id="spinner" class="flex justify-center items-center hidden">
+        <span class="loading loading-bars loading-xl"></span>
+      </section>
+
+      <!-- Search Bar -->
+      <section class="flex justify-center items-center">
+        <div class="join">
+          <div class="f">
+            <label class="input validator join-item">
+              <input
+                class=""
+                id="search-input"
+                type="text"
+                placeholder="Search Vocabulary"
+                required
+              />
+            </label>
+          </div>
+          <button id="search-btn" class="btn btn-primary join-item">
+            Search
+          </button>
+        </div>
       </section>
 
       <!-- Word Card -->
@@ -180,12 +206,12 @@
         </div>
       </section>
 
+      <!-- Card Modal -->
       <!-- Open the modal using ID.showModal() method -->
       <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
-      <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+      <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
         <div class="modal-box">
-          <h3 class="text-lg font-bold">Hello!</h3>
-          <p class="py-4">Press ESC key or click the button below to close</p>
+          <div id="details-container" class=""></div>
           <div class="modal-action">
             <form method="dialog">
               <!-- if there is a button in form, it will close the modal -->
