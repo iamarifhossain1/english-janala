@@ -5,12 +5,23 @@ const loadLessons = () => {
     .then((json) => displayLessons(json.data));
 };
 
+const removeActive = () => {
+  const remove = document.querySelectorAll(".lesson-btn");
+  remove.forEach((btn) => btn.classList.remove("active"));
+};
+
 const loadLevelWord = (id) => {
   console.log(id);
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   fetch(url)
     .then((response) => response.json())
-    .then((data) => loadWords(data.data));
+    .then((data) => {
+      removeActive();
+      const clickBtn = document.getElementById(`lesson-btn-${id}`);
+      //   console.log(clickBtn);
+      clickBtn.classList.add("active");
+      loadWords(data.data);
+    });
 };
 
 const displayLessons = (lessons) => {
@@ -24,7 +35,7 @@ const displayLessons = (lessons) => {
     console.log(lesson);
 
     const levelDiv = document.createElement("div");
-    levelDiv.innerHTML = `<button onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary">
+    levelDiv.innerHTML = `<button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn">
  <i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}</button>`;
 
     levelContainer.appendChild(levelDiv);
@@ -56,8 +67,8 @@ const loadWords = (words) => {
       word.pronunciation ? word.pronunciation : "Pronunciation পাওয়া যায়নি"
     }"</p>
           <div class="flex justify-between mx-6 items-center">
-            <button class="btn bg-blue-100">
-              <i class="fa-solid fa-circle-info"></i>
+            <button onclick="my_modal_5.showModal()" class="btn bg-blue-100">
+              <i class="fa-solid fa-circle-info "></i>
             </button>
             <button class="btn bg-blue-100">
               <i class="fa-solid fa-volume-high"></i>
